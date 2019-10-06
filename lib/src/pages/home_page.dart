@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/providers/peliculas_provider.dart';
 import 'package:peliculas/src/widgets/card_swiper.dart';
+import 'package:peliculas/src/widgets/movie_horizontal.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -17,6 +18,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
+    peliculasProvider.getEnCines();
+
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -30,8 +36,15 @@ class HomePage extends StatelessWidget {
         title: Text('Home Page'),
       ),
       body: Container(
-        height: 350.0,
-        child: _swiperTarjetas(),
+        
+       // height: 350.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            _swiperTarjetas(),
+            _footer(context),
+          ],
+        ),
       )
       //body: Container(color: Colors.blue,child: Text('Hola'),),
     
@@ -53,5 +66,38 @@ class HomePage extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget _footer(BuildContext context) {
+
+    return Container(
+      width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left:22.0),
+              child: Text('Populares',style: Theme.of(context).textTheme.subhead),
+            ),
+            SizedBox(height: 10.0,),
+            StreamBuilder(
+              stream: peliculasProvider.popularesStream,
+              builder: (BuildContext context, AsyncSnapshot <List> snapshot) {
+                print(snapshot.data);
+                if(snapshot.hasData){
+                  return MovieHorizontal(peliculas: snapshot.data, nextpage: peliculasProvider.getEnCines, );
+                }
+                else{
+                  return Center(child: CircularProgressIndicator());
+
+                }
+                
+              },
+            ),
+          ],
+        ),
+    );
+
+
   }
 }
