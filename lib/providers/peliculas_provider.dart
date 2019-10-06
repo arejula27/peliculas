@@ -70,9 +70,10 @@ class PeliculasProvider{
 
     final res =await _procesarRespuesta(url);
 
-
+  if(res!=null){
     _populares.addAll(res);
     popularesSink(_populares);
+  }
        
   
     return res;
