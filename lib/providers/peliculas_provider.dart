@@ -58,6 +58,7 @@ class PeliculasProvider{
 
 
   Future <List<Pelicula>> getPopulares()async{
+    print("getPopulares");
 
     _peliculasPage ++;
 

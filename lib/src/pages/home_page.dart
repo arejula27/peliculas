@@ -8,20 +8,14 @@ class HomePage extends StatelessWidget {
 
   final peliculasProvider = PeliculasProvider();
 
-  Container blueC = new Container(
-    color: Colors.blue,
-  );
-  Container yellowC = new Container(
-    color: Colors.yellow,
-  );
-
+  
 
   @override
   Widget build(BuildContext context) {
+print("hola");
 
 
-
-    peliculasProvider.getEnCines();
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -69,6 +63,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _footer(BuildContext context) {
+    peliculasProvider.getPopulares();
 
     return Container(
       width: double.infinity,
@@ -83,9 +78,12 @@ class HomePage extends StatelessWidget {
             StreamBuilder(
               stream: peliculasProvider.popularesStream,
               builder: (BuildContext context, AsyncSnapshot <List> snapshot) {
+                
                 print(snapshot.data);
+                
+
                 if(snapshot.hasData){
-                  return MovieHorizontal(peliculas: snapshot.data, nextpage: peliculasProvider.getEnCines, );
+                  return MovieHorizontal(peliculas: snapshot.data, nextpage: peliculasProvider.getPopulares, );
                 }
                 else{
                   return Center(child: CircularProgressIndicator());
