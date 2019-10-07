@@ -30,12 +30,41 @@ class MovieHorizontal extends StatelessWidget{
     
     return Container(
       height: _screenSize.height*0.25,
-      child: PageView(
+      child: PageView.builder(
         controller: _pageController,
         pageSnapping: false,//si esta a false al deslizar continuara deslizandose sin tocar la pantalla
-        children: _cardList(),
+        //children: _cardList(),
+        itemBuilder: (context,i){
+
+            return _cardPeli(context, peliculas[i]);
+        },
+        itemCount: peliculas.length,
       ),
     );
+  }
+
+  Widget _cardPeli(context,Pelicula pelicula){
+
+    
+        return Container(
+          margin: EdgeInsets.only(right: 20.0),
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: FadeInImage(
+                  image: NetworkImage(pelicula.getPosterUrl()),
+                  placeholder: AssetImage('assets/img/no-image.jpg'),
+                  fit: BoxFit.cover,
+                  height: 160.0,
+                ),
+              )
+            ],),
+        );
+
+
+
+
   }
 
 

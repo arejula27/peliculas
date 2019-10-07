@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-print("hola");
+
 
 
     
@@ -79,7 +79,7 @@ print("hola");
               stream: peliculasProvider.popularesStream,
               builder: (BuildContext context, AsyncSnapshot <List> snapshot) {
                 
-                print(snapshot.data);
+                
                 
 
                 if(snapshot.hasData){

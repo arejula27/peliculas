@@ -7,6 +7,8 @@ import 'package:peliculas/src/models/pelicula_models.dart';
 
 class PeliculasProvider{
 
+  bool _cargando =false;
+
   String _apikey='3725b34eb941d79716e452fd804777e7';
   String _url ='api.themoviedb.org';
   String _language = 'es-Es';
@@ -58,9 +60,14 @@ class PeliculasProvider{
 
 
   Future <List<Pelicula>> getPopulares()async{
-    print("getPopulares");
+    
+    
+    if(_cargando) return [];
+    else{
+    _cargando=true;
 
     _peliculasPage ++;
+    
 
       final url = Uri.https(_url, '3/movie/popular',{
         'api_key':_apikey,
@@ -74,9 +81,11 @@ class PeliculasProvider{
     _populares.addAll(res);
     popularesSink(_populares);
   }
+   _cargando=false;
        
   
     return res;
+    }
   }
 }
 
