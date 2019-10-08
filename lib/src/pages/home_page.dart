@@ -18,6 +18,8 @@ class HomePage extends StatelessWidget {
     
 
     return Scaffold(
+      
+      
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
@@ -29,16 +31,19 @@ class HomePage extends StatelessWidget {
         centerTitle: false,
         title: Text('Home Page'),
       ),
-      body: Container(
+      
+      
+              body: Container(
+          
+         // height: 350.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              _swiperTarjetas(),
+              _footer(context),
+            ],
+          ),
         
-       // height: 350.0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            _swiperTarjetas(),
-            _footer(context),
-          ],
-        ),
       )
       //body: Container(color: Colors.blue,child: Text('Hola'),),
     
@@ -66,6 +71,7 @@ class HomePage extends StatelessWidget {
     peliculasProvider.getPopulares();
 
     return Container(
+      //padding: EdgeInsets.only(bottom: 200),
       width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,23 +81,24 @@ class HomePage extends StatelessWidget {
               child: Text('Populares',style: Theme.of(context).textTheme.subhead),
             ),
             SizedBox(height: 10.0,),
-            StreamBuilder(
-              stream: peliculasProvider.popularesStream,
-              builder: (BuildContext context, AsyncSnapshot <List> snapshot) {
-                
-                
-                
+             StreamBuilder(
+                stream: peliculasProvider.popularesStream,
+                builder: (BuildContext context, AsyncSnapshot <List> snapshot) {
+                  
+                  
+                  
 
-                if(snapshot.hasData){
-                  return MovieHorizontal(peliculas: snapshot.data, nextpage: peliculasProvider.getPopulares, );
-                }
-                else{
-                  return Center(child: CircularProgressIndicator());
+                  if(snapshot.hasData){
+                    return MovieHorizontal(peliculas: snapshot.data, nextpage: peliculasProvider.getPopulares, );
+                  }
+                  else{
+                    return Center(child: CircularProgressIndicator());
 
-                }
-                
-              },
-            ),
+                  }
+                  
+                },
+              ),
+           
           ],
         ),
     );

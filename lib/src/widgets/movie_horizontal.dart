@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/pelicula_models.dart';
 
 
@@ -29,6 +30,7 @@ class MovieHorizontal extends StatelessWidget{
       final _screenSize =MediaQuery.of(context).size;
     
     return Container(
+      //padding: EdgeInsets.only(bottom: 20.0),
       height: _screenSize.height*0.25,
       child: PageView.builder(
         controller: _pageController,
@@ -46,7 +48,9 @@ class MovieHorizontal extends StatelessWidget{
   Widget _cardPeli(context,Pelicula pelicula){
 
     
-        return Container(
+        final peli = Container(
+          
+          
           margin: EdgeInsets.only(right: 20.0),
           child: Column(
             children: <Widget>[
@@ -56,10 +60,23 @@ class MovieHorizontal extends StatelessWidget{
                   image: NetworkImage(pelicula.getPosterUrl()),
                   placeholder: AssetImage('assets/img/no-image.jpg'),
                   fit: BoxFit.cover,
-                  height: 160.0,
+                  height: 150.0,
                 ),
-              )
+              ),
+              Text(
+                pelicula.title,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.caption,
+                //style:TextStyle(fontSize: 6.0)
+               ),
             ],),
+        );
+
+        return GestureDetector(
+          child: peli,
+          onTap: (){
+            Navigator.pushNamed(context, 'detalles', arguments: pelicula);
+          },
         );
 
 
@@ -69,6 +86,7 @@ class MovieHorizontal extends StatelessWidget{
 
 
 //Crea yna lista de cards con las fotos y imensiones ya puestas
+//la use al principio pero para usar el itembuilder hice otra funcion
   List<Widget> _cardList() {
 
     return peliculas.map((pelicula){
@@ -79,11 +97,11 @@ class MovieHorizontal extends StatelessWidget{
               ClipRRect(
                   borderRadius: BorderRadius.circular(20.0),
                   child: FadeInImage(
-                  image: NetworkImage(pelicula.getPosterUrl()),
-                  placeholder: AssetImage('assets/img/no-image.jpg'),
-                  fit: BoxFit.cover,
-                  height: 160.0,
-                ),
+                    image: NetworkImage(pelicula.getPosterUrl()),
+                    placeholder: AssetImage('assets/img/no-image.jpg'),
+                    fit: BoxFit.cover,
+                   height: 100.0,
+                  ),
               )
             ],),
         );
