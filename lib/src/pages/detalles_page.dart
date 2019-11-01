@@ -18,6 +18,7 @@ final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
             delegate: SliverChildListDelegate([
               SizedBox(height: 10.0,),
               _posterTitulo(pelicula,context),
+              _descripcion(pelicula),
               ]
               
             ),
@@ -29,7 +30,7 @@ final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
 
   }
 
-  Widget _crearAppBar(pelicula) {
+  Widget _crearAppBar(Pelicula pelicula) {
 
 return SliverAppBar(
   //hasta donde se contrae
@@ -66,7 +67,7 @@ return SliverAppBar(
 );
   }
 
-  Widget _posterTitulo(pelicula,context){ 
+  Widget _posterTitulo(Pelicula pelicula,context){ 
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -81,16 +82,28 @@ return SliverAppBar(
             height: 150.0,
           ),),
           SizedBox(width: 20.0,),
-          Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(right: 100.0),
-                child: Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, )),
-              Padding(
-                padding: EdgeInsets.only(right: 100.0),
-                child: Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, )),
+          //arregla eeror de overflow en texto
+          Flexible(
+            child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, ),
+                Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, ),
+                SizedBox(height: 15.0,),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.star_border),
+                    Text(
+                      pelicula.voteAverage.toString(),
+                      style: Theme.of(context).textTheme.subhead
+
+                    )
+                  ],
+                )
               ],
-            ),
+            ), 
+          )
+          
           
           
         ],
@@ -98,6 +111,12 @@ return SliverAppBar(
     );
 
 
+  }
+
+  Widget _descripcion(Pelicula pelicula) {
+
+    return Container(
+      child: Text(pelicula.overview),);
   }
 
 
