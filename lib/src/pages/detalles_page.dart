@@ -6,11 +6,12 @@ class Detalles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
+   final Pelicula pelicula =ModalRoute.of(context).settings.arguments;
     return Scaffold(
-
-      body: Center(child:Text(pelicula.title),),
-    );
+      body: Center(
+        child: Text(pelicula.title)
+        ),
+      );
     
     
   }
