@@ -70,12 +70,23 @@ releaseDate=json['release_date'];
 
 }
 
-getPosterUrl(){
+getPosterUrl() {
 
+    if ( posterPath == null ) {
+      return 'http://denrakaev.com/wp-content/uploads/2015/03/no-image.png';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
 
-  return posterPath==null?'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfFZYLB01r2E8Z4IMqJmsV2zfpydW7oxus7s5j-AOLWoAdKksD':'https://image.tmdb.org/t/p/w500/$posterPath';
-   
-}
+  getBackgroundImg() {
+
+    if ( posterPath == null ) {
+      return 'http://denrakaev.com/wp-content/uploads/2015/03/no-image.png';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+  }
 
 }
 

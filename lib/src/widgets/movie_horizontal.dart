@@ -75,7 +75,7 @@ class MovieHorizontal extends StatelessWidget{
         return GestureDetector(
           child: peli,
           onTap: (){
-            print("hola");
+            //Cambias de pagina pero la das arguentos
             Navigator.pushNamed(context, 'detalles',arguments: pelicula);
           },
         );
@@ -88,7 +88,7 @@ class MovieHorizontal extends StatelessWidget{
 
 //Crea yna lista de cards con las fotos y imensiones ya puestas
 //la use al principio pero para usar el itembuilder hice otra funcion
-  List<Widget> _cardList() {
+ /* List<Widget> _cardList() {
 
     return peliculas.map((pelicula){
         return Container(
@@ -114,7 +114,7 @@ class MovieHorizontal extends StatelessWidget{
 
 
 
-  }
+  }*/
 
 
 
