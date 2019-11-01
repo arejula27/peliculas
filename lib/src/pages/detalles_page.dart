@@ -43,9 +43,14 @@ return SliverAppBar(
     //el widget que se encuentra en el appbar y se contrae junto a ellla
     flexibleSpace: FlexibleSpaceBar(
       centerTitle: true,
-      title: Text(
-        pelicula.title,
-        style: TextStyle(color: Colors.white,fontSize: 16.0),
+      title: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 75.0),
+        child:Text(
+            pelicula.title,
+            style: TextStyle(color: Colors.white,fontSize: 16.0),
+            overflow: TextOverflow.ellipsis,
+          ),
+        
       ),
       
       //background:Image(image:NetworkImage(pelicula.getBackgroundImg() ,),)
@@ -78,8 +83,12 @@ return SliverAppBar(
           SizedBox(width: 20.0,),
           Column(
             children: <Widget>[
-              Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, ),
-                Text(pelicula.originalTitle, style: Theme.of(context).textTheme.subtitle, overflow: TextOverflow.ellipsis,),
+              Padding(
+                padding: EdgeInsets.only(right: 100.0),
+                child: Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, )),
+              Padding(
+                padding: EdgeInsets.only(right: 100.0),
+                child: Text(pelicula.title, style: Theme.of(context).textTheme.title, overflow: TextOverflow.ellipsis, )),
               ],
             ),
           
