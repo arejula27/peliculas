@@ -1,8 +1,8 @@
 
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:peliculas/src/models/actores_models.dart';
 import 'package:peliculas/src/models/pelicula_models.dart';
 
 class PeliculasProvider{
@@ -87,6 +87,22 @@ class PeliculasProvider{
     return res;
     }
   }
+
+  //como solo hay una cantidad finita de actores usaremos un future y no un stram
+  Future <List<Actor>> getCast(String peliId)async{
+
+      final url = Uri.https(_url,  '3/movie/$peliId/credits',{
+        'api_key':_apikey,
+        'languaje':_language,
+      });
+      //aquí puede llegar tanto el codigo del error como los datos
+    final resp = await http.get(url);
+    final decodedData = jsonDecode(resp.body);
+    final cast = new Cast.fromJsonList(decodedData['cast']);
+    return cast.actores;
+  }
+
+
 }
 
 

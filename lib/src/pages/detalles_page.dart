@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/providers/peliculas_provider.dart';
+import 'package:peliculas/src/models/actores_models.dart';
 import 'package:peliculas/src/models/pelicula_models.dart';
 
 
@@ -19,6 +21,8 @@ final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
               SizedBox(height: 10.0,),
               _posterTitulo(pelicula,context),
               _descripcion(pelicula),
+              SizedBox(height: 10.0,),
+              _crearCasting(pelicula),
               ]
               
             ),
@@ -116,7 +120,95 @@ return SliverAppBar(
   Widget _descripcion(Pelicula pelicula) {
 
     return Container(
+      padding: EdgeInsets.only(top: 14.0, left: 20.0, right: 20.0),
+      
       child: Text(pelicula.overview),);
+  }
+
+  Widget _crearCasting(Pelicula pelicula) {
+
+    // necesitamos el peli provider que contenga los futures
+    final peliProvider = PeliculasProvider();
+    return FutureBuilder(
+      future: peliProvider.getCast(pelicula.id.toString()),
+      
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        
+        if(snapshot.data==null)return Center(child: Padding(
+          padding: const EdgeInsets.only(top:50.0),
+          child: CircularProgressIndicator(),
+        ));
+        return _crearActoresPageView(snapshot.data);
+      },
+    );
+    
+  }
+
+  Widget _crearActoresPageView(List<Actor> actores) {
+
+    return SizedBox(
+      height: 200.0,
+      child:PageView.builder(
+        pageSnapping: false,
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1,
+        ),
+        itemCount: actores.length,
+        itemBuilder: ( context,i){
+          //return Text(actores[i].name);
+          return _cardActores(actores[i]);
+        },
+      ) ,);
+
+
+
+
+  }
+
+  Widget _cardActores(Actor actor) {
+/*
+    return Container(
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0) ,
+            child: FadeInImage(
+              placeholder: AssetImage("assets/img/no-image.jpg") ,
+              image: NetworkImage(actor.getPhoto()),
+              fit:  BoxFit.cover,
+
+            ),
+
+          ),
+          Text(actor.name,
+                overflow:TextOverflow.ellipsis)
+        ],
+      ),
+    );*/
+
+
+  //este deberia ir
+    return Container(
+      child: Column(
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: FadeInImage(
+              image: NetworkImage( actor.getPhoto() ),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
+              height: 150.0,
+              width: 100,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Text(
+            actor.name,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      )
+    );
   }
 
 
