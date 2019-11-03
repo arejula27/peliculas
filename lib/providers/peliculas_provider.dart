@@ -50,7 +50,7 @@ class PeliculasProvider{
 
       final url = Uri.https(_url, '3/movie/now_playing',{
         'api_key':_apikey,
-        'languaje':_language,
+        'language':_language,
       });
 
 
@@ -71,7 +71,7 @@ class PeliculasProvider{
 
       final url = Uri.https(_url, '3/movie/popular',{
         'api_key':_apikey,
-        'languaje':_language,
+        'language':_language,
         'page':_peliculasPage.toString()
       });
 
@@ -93,7 +93,7 @@ class PeliculasProvider{
 
       final url = Uri.https(_url,  '3/movie/$peliId/credits',{
         'api_key':_apikey,
-        'languaje':_language,
+        'language':_language,
       });
       //aquí puede llegar tanto el codigo del error como los datos
     final resp = await http.get(url);
