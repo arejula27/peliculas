@@ -79,12 +79,16 @@ return SliverAppBar(
         
         children: <Widget>[
           
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image(
-            image: NetworkImage(pelicula.getPosterUrl()),
-            height: 150.0,
-          ),),
+          Hero(
+            
+            tag: pelicula.uniqueId,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image(
+              image: NetworkImage(pelicula.getPosterUrl()),
+              height: 150.0,
+            ),),
+          ),
           SizedBox(width: 20.0,),
           //arregla eeror de overflow en texto
           Flexible(
@@ -167,28 +171,7 @@ return SliverAppBar(
   }
 
   Widget _cardActores(Actor actor) {
-/*
-    return Container(
-      child: Column(
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0) ,
-            child: FadeInImage(
-              placeholder: AssetImage("assets/img/no-image.jpg") ,
-              image: NetworkImage(actor.getPhoto()),
-              fit:  BoxFit.cover,
 
-            ),
-
-          ),
-          Text(actor.name,
-                overflow:TextOverflow.ellipsis)
-        ],
-      ),
-    );*/
-
-
-  //este deberia ir
     return Container(
       child: Column(
         children: <Widget>[
